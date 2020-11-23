@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "260395093144",
+    "firebase_url": "https://career-builder-e1bf0.firebaseio.com",
+    "project_id": "career-builder-e1bf0",
+    "storage_bucket": "career-builder-e1bf0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260395093144:android:9600715c7d3f9d4aab14ed",
+        "android_client_info": {
+          "package_name": "com.example.career_builder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260395093144-l9o9bm33i1n7mvkv75h6mp78op11ve7i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmNRTRdMtFGmxdKybY14p1YD6jI58L5Os"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "260395093144-l9o9bm33i1n7mvkv75h6mp78op11ve7i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
