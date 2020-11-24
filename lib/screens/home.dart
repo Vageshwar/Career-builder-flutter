@@ -55,7 +55,7 @@ class _HomeState extends State<Home> {
           ),
           iconTheme: IconThemeData(color: Colors.white),
           centerTitle: true,
-          backgroundColor: Colors.red,
+          backgroundColor: Color.fromARGB(255, 155, 21, 7),
           elevation: 5.0,
           actions: [
             Padding(
@@ -89,7 +89,7 @@ class NavigationDrawer extends StatelessWidget {
     return Container(
       width: 300,
       decoration: BoxDecoration(
-        color: Colors.redAccent,
+        color: Colors.white,
         boxShadow: [
           BoxShadow(color: Colors.black12, blurRadius: 16),
         ],
@@ -100,51 +100,51 @@ class NavigationDrawer extends StatelessWidget {
             height: 100,
           ),
           Divider(
-            color: Colors.white,
+            color: Colors.black,
           ),
           ListTile(
             title: NavBarItem("My Profile"),
             leading: Icon(
-              Icons.format_align_center,
-              color: Colors.white,
+              Icons.person,
+              color: Colors.black,
               size: 30,
             ),
             onTap: () => onTap(context, 0),
           ),
           Divider(
-            color: Colors.white,
+            color: Colors.black,
           ),
           ListTile(
             title: NavBarItem("Applications"),
             leading: Icon(
-              Icons.timeline,
-              color: Colors.white,
+              Icons.file_present,
+              color: Colors.black,
               size: 30,
             ),
             onTap: () => onTap(context, 1),
           ),
           Divider(
-            color: Colors.white,
+            color: Colors.black,
           ),
           ListTile(
             title: NavBarItem("Comapanies"),
             leading: Icon(
-              Icons.local_hospital_sharp,
-              color: Colors.white,
+              Icons.business,
+              color: Colors.black,
               size: 30,
             ),
             onTap: () => onTap(context, 2),
           ),
           Divider(
-            color: Colors.white,
+            color: Colors.black,
           ),
           ListTile(
             leading: Icon(
               Icons.logout,
-              color: Colors.white,
+              color: Colors.black,
             ),
             title: Text("Log Out",
-                style: TextStyle(fontSize: 20, color: Colors.white)),
+                style: TextStyle(fontSize: 20, color: Colors.black)),
             onTap: () {
               FirebaseAuth.instance.signOut();
               Navigator.of(context)
@@ -152,7 +152,10 @@ class NavigationDrawer extends StatelessWidget {
                 return Login();
               }));
             },
-          )
+          ),
+          Divider(
+            color: Colors.black,
+          ),
         ],
       ),
     );

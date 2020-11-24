@@ -60,7 +60,7 @@ class _Splash extends State<SplashTime> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Container(
-          decoration: new BoxDecoration(color: Colors.red),
+          decoration: new BoxDecoration(color: Color.fromARGB(255, 155, 21, 7)),
           child: Center(child: image),
         ), //<- place where the image appears
       ),

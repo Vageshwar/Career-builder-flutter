@@ -2,10 +2,17 @@ import 'package:career_builder/database/db.dart';
 import 'package:career_builder/modals/academics.dart';
 import 'package:career_builder/modals/project.dart';
 import 'package:career_builder/modals/student.dart';
+import 'package:career_builder/screens/edit/addProject.dart';
 import 'package:flutter/material.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
+  @override
+  _ProfileState createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
   final DB db = DB();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -77,18 +84,34 @@ class Profile extends StatelessWidget {
                 builder: (context, snapshot) {
                   if (snapshot == null) {
                     return CircularProgressIndicator();
-                  } else if (snapshot.hasData) {
+                  } else if (snapshot.data.length == 0)
+                    return Center(
+                      child: Text("No Projects Addded!"),
+                    );
+                  else {
                     return ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, i) {
-                          return ProjectsDetails(snapshot.data[i]);
+                          return ProjectsDetails(snapshot.data[i], this);
                         });
-                  } else {
-                    return Text("No Data Present");
                   }
                 }),
+            SizedBox(
+              height: 10,
+            ),
+            RaisedButton(
+              child: Text("Add More",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold)),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return AddProjectForm();
+                }));
+              },
+              color: Colors.blueAccent,
+            )
           ],
         ),
       ),
@@ -189,9 +212,16 @@ class AcademicsDetails extends StatelessWidget {
   }
 }
 
-class ProjectsDetails extends StatelessWidget {
+class ProjectsDetails extends StatefulWidget {
+  _ProfileState profile;
   final Project project;
-  ProjectsDetails(this.project);
+  ProjectsDetails(this.project, this.profile);
+
+  @override
+  _ProjectsDetailsState createState() => _ProjectsDetailsState();
+}
+
+class _ProjectsDetailsState extends State<ProjectsDetails> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -203,7 +233,7 @@ class ProjectsDetails extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              project.title,
+              widget.project.title,
               softWrap: true,
               style: TextStyle(
                   fontSize: 30,
@@ -217,10 +247,20 @@ class ProjectsDetails extends StatelessWidget {
               height: 10,
             ),
             Text(
-              project.description,
+              widget.project.description,
               softWrap: true,
               style: TextStyle(fontSize: 25, color: Colors.black),
             ),
+            RaisedButton(
+                child: Text(
+                  "Delete",
+                  style: TextStyle(color: Colors.white),
+                ),
+                color: Colors.red,
+                onPressed: () {
+                  DB().deleteProject(widget.project.title);
+                  widget.profile.setState(() {});
+                })
           ],
         ),
       ),

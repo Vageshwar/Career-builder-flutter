@@ -1,14 +1,14 @@
 import 'package:career_builder/database/db.dart';
 import 'package:career_builder/modals/project.dart';
-import 'package:career_builder/screens/forms/skills.dart';
+import 'package:career_builder/screens/home.dart';
 import 'package:flutter/material.dart';
 
-class ProjectForm extends StatefulWidget {
+class AddProjectForm extends StatefulWidget {
   @override
-  _ProjectFormState createState() => _ProjectFormState();
+  _AddProjectFormState createState() => _AddProjectFormState();
 }
 
-class _ProjectFormState extends State<ProjectForm> {
+class _AddProjectFormState extends State<AddProjectForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Project project;
   String addProject = "Add Project";
@@ -104,19 +104,16 @@ class _ProjectFormState extends State<ProjectForm> {
     new Future.delayed(new Duration(seconds: 3), () {
       //Navigator.pop(context);
       //rt = true; //pop dialog
-      Navigator.pop(context);
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (context) {
+        return Home();
+      }));
       print("After 3 ");
     });
     _formKey.currentState.reset();
     setState(() {
-      addProject = "Add Another";
+      addProject = "Add Project";
     });
-  }
-
-  void _proceed() {
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
-      return SkillsForm();
-    }));
   }
 
   Widget _buildButtons() {
@@ -131,18 +128,6 @@ class _ProjectFormState extends State<ProjectForm> {
               style: TextStyle(color: Colors.white, fontSize: 15),
             ),
             onPressed: _addProject,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          new RaisedButton(
-            padding: EdgeInsets.fromLTRB(132, 15, 132, 15),
-            color: Colors.blue,
-            child: new Text(
-              'Proceed',
-              style: TextStyle(color: Colors.white, fontSize: 15),
-            ),
-            onPressed: _proceed,
           ),
         ],
       ),
@@ -179,71 +164,10 @@ class _ProjectFormState extends State<ProjectForm> {
                   SizedBox(
                     height: 10,
                   ),
-                  _buildButtons(),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  FutureBuilder(
-                      future: DB().getProject(),
-                      builder: (context, snapshot) {
-                        if (snapshot == null) {
-                          return CircularProgressIndicator();
-                        } else if (snapshot.data.length == 0)
-                          return Center(
-                            child: Text("No Projects Addded!"),
-                          );
-                        else {
-                          return ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (context, i) {
-                                return ProjectsDetails(snapshot.data[i]);
-                              });
-                        }
-                      }),
+                  _buildButtons()
                 ],
               ),
             )),
-      ),
-    );
-  }
-}
-
-class ProjectsDetails extends StatelessWidget {
-  final Project project;
-  ProjectsDetails(this.project);
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Padding(
-        padding: EdgeInsets.all(25),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              project.title,
-              softWrap: true,
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
-            ),
-            Divider(
-              color: Colors.grey,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              project.description,
-              softWrap: true,
-              style: TextStyle(fontSize: 25, color: Colors.black),
-            ),
-          ],
-        ),
       ),
     );
   }

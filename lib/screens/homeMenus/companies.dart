@@ -37,7 +37,7 @@ class _CompaniesState extends State<Companies> {
                       color: Colors.white,
                     ),
                     contentPadding: EdgeInsets.all(10),
-                    tileColor: Colors.redAccent,
+                    tileColor: Color.fromARGB(255, 155, 21, 7),
                     title: Text(
                       snapshot.data[index].name,
                       style: TextStyle(fontSize: 25, color: Colors.white),

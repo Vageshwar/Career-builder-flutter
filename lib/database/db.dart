@@ -161,6 +161,7 @@ class DB {
         .doc(email.toLowerCase())
         .collection("Projects")
         .get();
+
     var data = snapshot.docs;
     data.forEach((e) {
       Project p = Project();
@@ -289,5 +290,15 @@ class DB {
     });
 
     return allcompanies;
+  }
+
+  void deleteProject(String title) {
+    String email = firebaseAuth.currentUser.email;
+    _db
+        .collection("Students")
+        .doc(email.toLowerCase())
+        .collection("Projects")
+        .doc(title)
+        .delete();
   }
 }

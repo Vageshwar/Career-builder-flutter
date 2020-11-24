@@ -268,6 +268,7 @@ class _MainRegistrationState extends State<MainRegistration> {
     student = Student();
     student.gender = gender;
     if (!_formKey.currentState.validate()) return;
+    _formKey.currentState.save();
     if (pass != cPass) {
       Widget okButton = FlatButton(
         child: Text("OK"),
@@ -290,7 +291,6 @@ class _MainRegistrationState extends State<MainRegistration> {
       );
       return;
     }
-    _formKey.currentState.save();
 
     DB db = DB();
     var rt = db.createStudent(pass, student);
