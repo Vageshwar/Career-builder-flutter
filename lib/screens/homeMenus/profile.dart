@@ -2,6 +2,7 @@ import 'package:career_builder/database/db.dart';
 import 'package:career_builder/modals/academics.dart';
 import 'package:career_builder/modals/project.dart';
 import 'package:career_builder/modals/student.dart';
+import 'package:career_builder/screens/edit/addExam.dart';
 import 'package:career_builder/screens/edit/addProject.dart';
 import 'package:flutter/material.dart';
 
@@ -66,6 +67,17 @@ class _ProfileState extends State<Profile> {
                 }),
             SizedBox(
               height: 5,
+            ),
+            RaisedButton(
+              child: Text("Add Academics",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold)),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return AddAcademicsForm();
+                }));
+              },
+              color: Colors.blueAccent,
             ),
             Divider(
               color: Colors.red,

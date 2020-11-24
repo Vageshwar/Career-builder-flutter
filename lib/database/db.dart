@@ -82,6 +82,21 @@ class DB {
     });
   }
 
+  void addAcademicsLater(Academics academics) {
+    String email = firebaseAuth.currentUser.email;
+    _db
+        .collection("Students")
+        .doc(email.toLowerCase())
+        .collection("Academics")
+        .doc(academics.examName)
+        .set({
+      "Marks": academics.marks,
+      "Year": academics.year,
+      "University Name": academics.clgName,
+      "Exam Name": academics.examName
+    });
+  }
+
   Future addProjectsData(
     Project project,
   ) {
