@@ -97,7 +97,7 @@ class DB {
     });
   }
 
-  Future addProjectsData(
+  void addProjectsData(
     Project project,
   ) {
     String email = firebaseAuth.currentUser.email;
@@ -141,8 +141,6 @@ class DB {
 
   Future<List<Academics>> getAcademics() async {
     print("Acdemics : DB");
-    Academics ssc = Academics();
-    Academics hsc = Academics();
     List<Academics> academics = [];
     String email = firebaseAuth.currentUser.email;
     var snapshot1 = await _db
@@ -151,20 +149,15 @@ class DB {
         .collection("Academics")
         .get();
     var data = snapshot1.docs;
-    var sscData = data[0].data();
-    var hscData = data[1].data();
-    print(sscData);
-    print(hscData);
-    ssc.examName = sscData["Exam Name"];
-    ssc.clgName = sscData["University Name"];
-    ssc.marks = sscData["Marks"];
-    ssc.year = sscData["Year"];
-    hsc.examName = hscData["Exam Name"];
-    hsc.clgName = hscData["University Name"];
-    hsc.marks = hscData["Marks"];
-    hsc.year = hscData["Year"];
-    academics.add(ssc);
-    academics.add(hsc);
+    data.forEach((e) {
+      Academics ssc = Academics();
+      ssc.examName = e.data()["Exam Name"];
+      ssc.clgName = e.data()["University Name"];
+      ssc.marks = e.data()["Marks"];
+      ssc.year = e.data()["Year"];
+
+      academics.add(ssc);
+    });
     return academics;
   }
 

@@ -200,10 +200,10 @@ class _AddAcademicsFormState extends State<AddAcademicsForm> {
     new Future.delayed(new Duration(seconds: 2), () {
       //Navigator.pop(context);
       //rt = true; //pop dialog
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) {
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (context) {
         return Home();
-      }));
+      }), (route) => false);
       print("After 2 ");
     });
   }

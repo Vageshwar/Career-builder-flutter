@@ -57,7 +57,7 @@ class _ProfileState extends State<Profile> {
                     return ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: 2,
+                        itemCount: snapshot.data.length,
                         itemBuilder: (context, i) {
                           return AcademicsDetails(snapshot.data[i]);
                         });
